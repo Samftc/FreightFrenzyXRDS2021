@@ -19,5 +19,6 @@ public class BoredAuto extends LinearOpMode {
     @Override
     public void runOpMode()  {
 
+
     }
 }
