@@ -34,15 +34,19 @@ public class HardwareAuto extends LinearOpMode {
 
         waitForStart();
 
-        while(pos < 1000){
+        while(pos < 1000 && opModeIsActive()){
             bot.BR.setPower(1);
 
             pos = bot.BR.getCurrentPosition();
+            telemetry.addData("go","");
+
+            telemetry.update();
 
 
         }
 
         bot.BR.setPower(0);
+        telemetry.addData("stop","");
 
 
 
