@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 
 @TeleOp(name = "armtest", group = "Sensor")
-public class armtest extends OpMode{
+public class armtest extends OpMode {
     DcMotor A;
     DcMotor FL;
     DcMotor BL;
@@ -40,37 +40,48 @@ public class armtest extends OpMode{
 
     @Override
     public void loop() {
-        telemetry.addData("HSR", "+i" );
-        telemetry.addData("HSL", "+i" );
+        telemetry.addData("HSR", "" + i);
+        telemetry.addData("HSL", "" + j);
 
 
-        if(gamepad1.y){
-            i= 1;
-            j= 0;
+        if (gamepad1.y) {
+            //arm close
+            i = 0.70;//right
+            j = 0.30;//left
             HSR.setPosition(i);
             HSL.setPosition(j);
         }
 
-        if(gamepad1.a){
-            i= 0;
-            j= 1;
+        if (gamepad1.a) {
+            //arm open
+            i = 1; //right
+            j = 0; //left
             HSR.setPosition(i);
             HSL.setPosition(j);
         }
 
 
-
-        if(gamepad1.x){
+        if (gamepad1.b) {
+            //arm close gradually
+            if (i > 0.70)
+                i -= 0.005;
+            if (j < 0.30)
+                i += 0.005;
             HSR.setPosition(i);
-            HSL.setPosition(i*-1);
-           // if(i>0)
-               // i-=0.005;
+            HSL.setPosition(j);
         }
-        if(gamepad1.b){
+        if (gamepad1.x) {
+            //arm open gradually
+            if (i < 1)
+                i += 0.005;
+            if (j > 0)
+                i -= 0.005;
             HSR.setPosition(i);
-            HSL.setPosition(i*-1);
-          //  if(i<1)
-            //    i+=0.005;
+            HSL.setPosition(j);
+        }
+        if (gamepad1.left_trigger == 1) {
+            HSR.setPosition(1);
+            HSL.setPosition(-1);
         }
     }
 }
