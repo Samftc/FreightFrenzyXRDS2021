@@ -109,8 +109,6 @@ public class HardwareOmni
         // Define and initialize ALL installed servos.
        HSL  = hwMap.get(Servo.class, "hand_servo_left");
        HSR = hwMap.get(Servo.class, "hand_servo_right");
-        HSL.setPosition(MID_SERVO);
-        HSR.setPosition(MID_SERVO);
     }
  }
 
