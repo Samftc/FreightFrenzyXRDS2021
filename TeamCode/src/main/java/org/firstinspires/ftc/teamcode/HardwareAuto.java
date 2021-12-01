@@ -38,7 +38,12 @@ public class HardwareAuto extends LinearOpMode {
 
         bot.BR.setPower(1);
 
-        duckdrive(speed, 5000);
+
+
+        duckdrive(speed, 1500);
+        bot.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        resetStartTime();
+        time = getRuntime();
 
         rightdrive(speed, 5000);
         duckdrive(speed, 1000);
@@ -72,7 +77,8 @@ public class HardwareAuto extends LinearOpMode {
             telemetry.update();
 
         }
-        bot.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+
 
 
 
@@ -85,7 +91,7 @@ public class HardwareAuto extends LinearOpMode {
         bot.BR.setTargetPosition(right);
         bot.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        while(pos < right && time < 10 && opModeIsActive()){
+        while(pos > right && time < 10 && opModeIsActive()){
 
 
             pos = bot.BR.getCurrentPosition();
