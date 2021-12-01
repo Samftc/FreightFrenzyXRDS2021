@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
@@ -10,47 +11,94 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class HardwareAuto extends LinearOpMode {
 
     HardwareOmni        bot = new HardwareOmni();
-    private ElapsedTime runtime = new ElapsedTime();
+
+    double time;
 
 
-    double pos;
+    double pos = 0;
+
+    double speed = 1;
 
 
 
     @Override
     public void runOpMode() {
         bot.init(hardwareMap);
-
-        bot.BR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        bot.BL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        bot.FL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        bot.FR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-
         bot.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        bot.BL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        bot.FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        bot.FL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bot.BR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        bot.BR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+
+        time = getRuntime();
 
         waitForStart();
 
-        while(pos < 1000 && opModeIsActive()){
+
+        bot.BR.setTargetPosition(1000);
+
+        bot.BR.setPower(1);
+
+        duckdrive(speed, 5000);
+
+        rightdrive(speed, 5000);
+        duckdrive(speed, 1000);
+        duckdrive(speed, 500);
+
+
+
+
+
+        telemetry.addData("stop","");
+
+
+
+
+
+    }
+
+    private void duckdrive(double speed, int left) {
+        bot.BR.setPower(speed);
+        bot.BR.setTargetPosition(left);
+
+        while(pos < left && time < 10 && opModeIsActive()){
 
 
             pos = bot.BR.getCurrentPosition();
-            telemetry.addData("go","");
+            telemetry.addData("left",""+pos);
+            telemetry.addData("time",""+time);
+            time = getRuntime();
+
 
             telemetry.update();
-            bot.BR.setPower(1);
-            bot.BL.setPower(1);
-            bot.FR.setPower(1);
-            bot.FL.setPower(1);
 
         }
+        bot.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        bot.BR.setPower(0);
-        telemetry.addData("stop","");
 
+
+
+    }
+
+    private void rightdrive(double speed, int right) {
+        bot.BR.setPower(speed);
+        bot.BR.setDirection(DcMotorSimple.Direction.REVERSE);
+        bot.BR.setTargetPosition(right);
+        bot.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        while(pos < right && time < 10 && opModeIsActive()){
+
+
+            pos = bot.BR.getCurrentPosition();
+            telemetry.addData("right",""+pos);
+            telemetry.addData("time",""+time);
+            time = getRuntime();
+
+
+            telemetry.update();
+
+        }
+        bot.BR.setDirection(DcMotorSimple.Direction.FORWARD);
+        bot.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
 
