@@ -24,22 +24,22 @@ public class HardwareAuto extends LinearOpMode {
     @Override
     public void runOpMode() {
         bot.init(hardwareMap);
-        bot.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        bot.BR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        bot.BR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        bot.markus.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bot.markus.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        bot.markus.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
 
         waitForStart();
 
 
-        bot.BR.setTargetPosition(1000);
+        bot.markus.setTargetPosition(1000);
 
-        bot.BR.setPower(1);
+        bot.markus.setPower(1);
 
 
 
         duckdrive(speed, 1500);
-        bot.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bot.markus.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
 
@@ -60,9 +60,9 @@ public class HardwareAuto extends LinearOpMode {
     }
 
     private void duckdrive(double speed, int left) {
-        bot.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        bot.BR.setPower(speed);
-        bot.BR.setTargetPosition(left);
+        bot.markus.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bot.markus.setPower(speed);
+        bot.markus.setTargetPosition(left);
 
 
         runtime.reset();
@@ -72,7 +72,7 @@ public class HardwareAuto extends LinearOpMode {
         while(pos < left && runtime.seconds()< 10 && opModeIsActive()){
 
 
-            pos = bot.BR.getCurrentPosition();
+            pos = bot.markus.getCurrentPosition();
             telemetry.addData("left",""+pos);
             telemetry.addData("time",""+runtime.seconds());
 
@@ -90,18 +90,18 @@ public class HardwareAuto extends LinearOpMode {
     }
 
     private void rightdrive(double speed, int right) {
-        bot.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        bot.BR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        bot.BR.setPower(speed);
-        bot.BR.setDirection(DcMotorSimple.Direction.REVERSE);
-        bot.BR.setTargetPosition(right);
+        bot.markus.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bot.markus.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        bot.markus.setPower(speed);
+        bot.markus.setDirection(DcMotorSimple.Direction.REVERSE);
+        bot.markus.setTargetPosition(right);
 
         runtime.reset();
 
         while(pos < right && runtime.seconds() < 3 && opModeIsActive()){
 
 
-            pos = bot.BR.getCurrentPosition();
+            pos = bot.markus.getCurrentPosition();
             telemetry.addData("right",""+pos);
             telemetry.addData("time",""+runtime.seconds());
 
@@ -109,8 +109,8 @@ public class HardwareAuto extends LinearOpMode {
             telemetry.update();
 
         }
-        bot.BR.setDirection(DcMotorSimple.Direction.FORWARD);
-        bot.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bot.markus.setDirection(DcMotorSimple.Direction.FORWARD);
+        bot.markus.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
 
