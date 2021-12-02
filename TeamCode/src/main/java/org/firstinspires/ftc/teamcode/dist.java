@@ -93,10 +93,12 @@ public class dist extends LinearOpMode {
             telemetry.addData("did time out", Boolean.toString(sensorTimeOfFlight.didTimeoutOccur()));
 
             telemetry.update();
-            if (distance < 10) {
-                BR.setPower(1);
-            } else {
+
+            if (distance < 5) {
                 BR.setPower(0);
+
+            } else {
+                BR.setPower(1);
             }
 
         }
