@@ -65,7 +65,7 @@ public class armtest extends OpMode {
             //arm close gradually
             if (i > 0.70)
                 i -= 0.005;
-            if (j < 0.30)
+            if (j < 0.30)  
                 i += 0.005;
             HSR.setPosition(i);
             HSL.setPosition(j);
