@@ -44,7 +44,7 @@ public class HardwareAuto extends LinearOpMode {
 
 
 
-        rightdrive(speed, 5000);
+        rightdrive(speed, 2000);
         bot.markus.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         bot.markus.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
@@ -115,7 +115,7 @@ public class HardwareAuto extends LinearOpMode {
 
         }
         bot.markus.setDirection(DcMotorSimple.Direction.FORWARD);
-        bot.markus.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
 
 
 
