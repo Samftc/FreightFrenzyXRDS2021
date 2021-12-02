@@ -39,28 +39,26 @@ public class DistAuto extends LinearOpMode {
             double distance = sensorRange.getDistance(DistanceUnit.CM);
 
             telemetry.addData("distance", distance);
-
+            telemetry.addData("markus",""+bot.markus.getPower());
+            telemetry.update();
 
             // Rev2mDistanceSensor specific methods.
             telemetry.addData("ID", String.format("%x", sensorTimeOfFlight.getModelID()));
             telemetry.addData("did time out", Boolean.toString(sensorTimeOfFlight.didTimeoutOccur()));
 
             telemetry.update();
-bot.BR.setPower(1);
             if (distance < 8) {
-                bot.BR.setPower(0);
+                bot.markus.setPower(0);
                 bot.Arm.setPower(1);
 
             } else if (distance < 10) {
-                bot.BR.setPower(0.5);
+                bot.markus.setPower(0.5);
             } else  if (distance < 15) {
-                        bot.BR.setPower(0.75);
+                        bot.markus.setPower(0.75);
+
                     }
                 }
             }
 
 
         }
-
-    }
-}
