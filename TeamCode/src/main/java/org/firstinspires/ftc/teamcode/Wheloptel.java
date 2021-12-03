@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Wheloptel extends OpMode {
 
-    DcMotor A;
+    DcMotor Arm;
     DcMotor FL;
     DcMotor BL;
     DcMotor BR;
@@ -47,7 +47,7 @@ Servos:
   hand_servo*/
         BR = hardwareMap.dcMotor.get("back_right_motor");
         FR = hardwareMap.dcMotor.get("front_right_motor");
-        A = hardwareMap.dcMotor.get("arm_motor");
+        Arm = hardwareMap.dcMotor.get("arm_motor");
         FL = hardwareMap.dcMotor.get("front_left_motor");
         BL = hardwareMap.dcMotor.get("back_left_motor");
         HSL = hardwareMap.servo.get("hand_servo_left");
@@ -59,7 +59,7 @@ Servos:
 
         BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        A.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        Arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -120,7 +120,7 @@ Servos:
         up = gamepad2.right_trigger;
         down = gamepad2.left_trigger;
 
-        A.setPower(up - down);
+        Arm.setPower(up - down);
 
         //open claw
         if(gamepad2.x){

@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 //hello
 
@@ -15,6 +14,7 @@ public class HardwareAuto extends LinearOpMode {
 
 
     double pos = 0;
+    int r = 0;
 
     double speed = 1;
     private ElapsedTime     runtime = new ElapsedTime();
@@ -22,38 +22,20 @@ public class HardwareAuto extends LinearOpMode {
 
 
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException {
         bot.init(hardwareMap);
         bot.markus.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         bot.markus.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        bot.markus.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
 
         waitForStart();
 
 
-        bot.markus.setTargetPosition(1000);
-
-        bot.markus.setPower(1);
-
-
-
-        duckdrive(speed, 1500);
-        bot.markus.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        bot.markus.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-
-
-        rightdrive(speed, 2000);
-        bot.markus.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        bot.markus.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        duckdrive(speed, 1000);
-
-        bot.markus.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        bot.markus.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        duckdrive(speed, 500);
+            //functions that control the drive motors, 
+        duckdrive(speed, 4000, 0, false);//for reverse 0 is  1 is backwards
+        duckdrive(speed, 8000, 1, false);
+        duckdrive(speed, 2000, 0, true);
+        duckdrive(speed, 2000, 1, false);
 
 
 
@@ -67,58 +49,66 @@ public class HardwareAuto extends LinearOpMode {
 
     }
 
-    private void duckdrive(double speed, int left) {
-        bot.markus.setPower(speed);
-        bot.markus.setTargetPosition(left);
+    private void duckdrive(double speed, int forward, int reverse, boolean duckwheel) {
+        bot.markus.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
+        bot.markus.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        runtime.reset();
-
-
-
-        while(pos < left && runtime.seconds()< 10 && opModeIsActive()){
-
-
-            pos = bot.markus.getCurrentPosition();
-            telemetry.addData("left",""+pos);
-            telemetry.addData("time",""+runtime.seconds());
-
-
-
-            telemetry.update();
-
+        if(reverse == 0) {
+            bot.markus.setTargetPosition(forward);
+        }
+        else if (reverse == 1){
+            bot.markus.setTargetPosition(forward*-1);
         }
 
 
 
+        bot.markus.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
 
-
-    }
-
-    private void rightdrive(double speed, int right) {
         bot.markus.setPower(speed);
-        bot.markus.setDirection(DcMotorSimple.Direction.REVERSE);
-        bot.markus.setTargetPosition(right);
 
         runtime.reset();
 
-        while(pos < right && runtime.seconds() < 3 && opModeIsActive()){
+        if(duckwheel){
+            bot.Arm.setPower(1);
+        }
+        else{
+            bot.Arm.setPower(0);
+        }
 
 
-            pos = bot.markus.getCurrentPosition();
-            telemetry.addData("right",""+pos);
-            telemetry.addData("time",""+runtime.seconds());
+        if (reverse == 0) {
+            while (pos < forward && runtime.seconds() < 10 && opModeIsActive()) {
 
 
-            telemetry.update();
+                pos = bot.markus.getCurrentPosition();
+                telemetry.addData("forward", "" + pos);
+                telemetry.addData("time", "" + runtime.seconds());
+
+
+                telemetry.update();
+
+            }
+
 
         }
-        bot.markus.setDirection(DcMotorSimple.Direction.FORWARD);
+        else if (reverse == 1){
+            while (pos > forward*-1 && runtime.seconds() < 10 && opModeIsActive()) {
 
 
+                pos = bot.markus.getCurrentPosition();
+                telemetry.addData("forward", "" + pos);
+                telemetry.addData("time", "" + runtime.seconds());
 
 
+                telemetry.update();
+            }
+        }
 
     }
+
+
+
+
 }
