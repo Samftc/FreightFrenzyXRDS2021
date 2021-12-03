@@ -122,16 +122,17 @@ Servos:
 
         Arm.setPower(up - down);
 
-        //open claw
+
         if(gamepad2.x){
-            HSL.setPosition(0.8); //sets the servo to open
-            HSR.setPosition(0.2);
+            HSL.setPosition(0.3); //sets the servo to closed
+            HSR.setPosition(0.3);
 
         }
-        //close claw
-        if(gamepad2.b){
-            HSL.setPosition(0.0); //sets the servo to closed
-            HSR.setPosition(1);
+
+        else if(gamepad2.b){
+            HSL.setPosition(-2); //sets the servo to open
+            HSR.setPosition(2);
+
         }
 
         //swivels claw
@@ -162,6 +163,7 @@ Servos:
         telemetry.addData("Back Right", LPower -(2 * Left));
         telemetry.addData("Front Right", LPower +(2 * Left));
         telemetry.addData("pos", pos);
+        telemetry.update();
 
         //cool equation for mapping numbers just in case Y = (X-A)/(B-A) * (D-C) + C
 
