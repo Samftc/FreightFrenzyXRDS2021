@@ -64,6 +64,7 @@ public class HardwareOmni
     public DcMotor  FR     = null;
     public DcMotor  FL     = null;
     public DcMotor  Arm     = null;
+    public DcMotor  duck     = null;
     public DcMotor  markus     = null;
     public Servo    HSL    = null;
     public Servo    HSR  = null;
@@ -93,6 +94,7 @@ public class HardwareOmni
         FR = hwMap.get(DcMotor.class, "front_right_motor");
         Arm = hwMap.get(DcMotor.class, "arm_motor");
         markus = hwMap.get(DcMotor.class, "markus");
+        duck = hwMap.get(DcMotor.class, "duck");
         BL.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
         FL.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -103,6 +105,7 @@ public class HardwareOmni
       FL.setPower(0);
       Arm.setPower(0);
       markus.setPower(0);
+      duck.setPower(0);
 
 
         // Set all motors to run without encoders.
@@ -113,6 +116,7 @@ public class HardwareOmni
         FL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         Arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         markus.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        duck.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.
        HSL  = hwMap.get(Servo.class, "hand_servo_left");

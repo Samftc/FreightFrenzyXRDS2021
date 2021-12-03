@@ -74,10 +74,10 @@ public class HardwareAuto extends LinearOpMode {
         runtime.reset();
 
         if(duckwheel){
-            bot.Arm.setPower(1);
+            bot.duck.setPower(1);
         }
         else{
-            bot.Arm.setPower(0);
+            bot.duck.setPower(0);
         }
 
 
@@ -107,6 +107,16 @@ public class HardwareAuto extends LinearOpMode {
 
                 telemetry.update();
             }
+        }
+
+        //added comment
+
+
+        if(extrawait > runtime.seconds()){
+        while(extrawait > runtime.seconds() && opModeIsActive()){
+            telemetry.addData("time", runtime.seconds());
+            telemetry.update();
+                      }
         }
 
 
