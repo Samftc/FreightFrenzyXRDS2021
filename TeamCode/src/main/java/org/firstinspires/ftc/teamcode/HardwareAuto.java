@@ -55,10 +55,6 @@ public class HardwareAuto extends LinearOpMode {
 
         bot.markus.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        while(extrawait < runtime.seconds()){
-            telemetry.addData("time", runtime.seconds());
-            telemetry.update();
-        }
 
 
         if(reverse == 0) {
@@ -112,6 +108,14 @@ public class HardwareAuto extends LinearOpMode {
                 telemetry.update();
             }
         }
+
+
+        while(extrawait < runtime.seconds()){
+            telemetry.addData("time", runtime.seconds());
+            telemetry.update();
+        }
+
+
 
     }
 

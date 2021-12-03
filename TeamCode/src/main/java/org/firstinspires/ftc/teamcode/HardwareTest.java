@@ -21,7 +21,6 @@ public class HardwareTest extends LinearOpMode {
         bot.markus.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
-
         waitForStart();
 
         bot.BR.setTargetPosition(1000);
