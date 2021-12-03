@@ -113,7 +113,7 @@ public class HardwareAuto extends LinearOpMode {
 
 
 
-        while(extrawait < runtime.seconds() && opModeIsActive()){
+        while(extrawait > runtime.seconds() && opModeIsActive()){
             telemetry.addData("time", runtime.seconds());
             telemetry.update();
         }
