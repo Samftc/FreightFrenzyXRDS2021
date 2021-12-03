@@ -32,10 +32,11 @@ public class HardwareAuto extends LinearOpMode {
 
 
             //functions that control the drive motors, 
-        duckdrive(speed, 4000, 0, false);//for reverse 0 is  1 is backwards
-        duckdrive(speed, 8000, 1, false);
-        duckdrive(speed, 2000, 0, true);
-        duckdrive(speed, 2000, 1, false);
+        duckdrive(speed, 4000, 0, false, 0);//for reverse 0 is  1 is backwards
+        duckdrive(speed, 8000, 1, true,0);
+        duckdrive(speed, 0, 0, true,10);
+        duckdrive(speed, 2000, 0, false,0);
+        duckdrive(speed, 2000, 1, false,0);
 
 
 
@@ -49,10 +50,16 @@ public class HardwareAuto extends LinearOpMode {
 
     }
 
-    private void duckdrive(double speed, int forward, int reverse, boolean duckwheel) {
+    private void duckdrive(double speed, int forward, int reverse, boolean duckwheel, double extrawait) {
         bot.markus.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         bot.markus.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        while(extrawait < runtime.seconds()){
+            telemetry.addData("time", runtime.seconds());
+            telemetry.update();
+        }
+
 
         if(reverse == 0) {
             bot.markus.setTargetPosition(forward);
