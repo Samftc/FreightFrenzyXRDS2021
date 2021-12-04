@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import java.util.concurrent.TimeUnit;
+import java.util.Date;
 //hello
 
 @Autonomous(name = "HardwareAuto")
@@ -112,7 +114,14 @@ public class HardwareAuto extends LinearOpMode {
 
 
         if (extrawait > 0){
+            runtime.reset();
             while(extrawait < getRuntime()){
+                try {
+                    TimeUnit.SECONDS.sleep(7);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                extrawait = getRuntime()+1;
                 telemetry.addData("time",getRuntime());
                 telemetry.update();
             }

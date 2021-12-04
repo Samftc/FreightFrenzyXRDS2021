@@ -85,3 +85,27 @@ public class armtest extends OpMode {
         }
     }
 }
+
+/* swivels claw
+        if(gamepad2.y && go){
+                pos = pos + 0.2;
+                go = false;
+                }
+
+                if(gamepad2.a && go){
+                pos = pos - 0.2;
+                go = false;
+                }
+                if (!gamepad2.a && !gamepad2.y){
+
+                if (pos > 1){
+                pos = 1;
+                }
+                else if(pos < 0){
+        pos = 0;
+        }
+
+        go = true;
+        //ends claw swivel
+        }
+*/

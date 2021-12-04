@@ -47,33 +47,33 @@ public class DistAuto extends LinearOpMode {
 
             telemetry.update();
 
-            if (distance < 8) {
+            if (distance < 10) {
                 bot.BL.setPower(0);
                 bot.FL.setPower(0);
                 bot.BR.setPower(0);
-                bot.FL.setPower(0);
+                bot.FR.setPower(0);
 
                // bot.Arm.setPower(1);
 
-            } else if (distance < 10) {
+            } else if (distance < 15) {
               //  bot.markus.setPower(0.5);
                 bot.BL.setPower(-0.5);
                 bot.FL.setPower(-0.5);
-                bot.BR.setPower(0.5);
-                bot.FL.setPower(0.5);
+                bot.BR.setPower(-0.5);
+                bot.FR.setPower(-0.5);
                // bot.Arm.setPower(0);
-            } else  if (distance < 15) {
+            } else  if (distance < 25) {
                // bot.markus.setPower(0.75);
                 bot.BL.setPower(-0.75);
                 bot.FL.setPower(-0.75);
-                bot.BR.setPower(0.75);
-                bot.FL.setPower(0.75);
+                bot.BR.setPower(-0.75);
+                bot.FR.setPower(-0.75);
                // bot.Arm.setPower(0);
-            } else if (distance >=15) {
+            } else if (distance >=25) {
                 bot.BL.setPower(-1);
                 bot.FL.setPower(-1);
-                bot.BR.setPower(1);
-                bot.FL.setPower(1);
+                bot.BR.setPower(-1);
+                bot.FR.setPower(-1);
                // bot.markus.setPower(1);
                // bot.Arm.setPower(0);
 
