@@ -88,7 +88,7 @@ Servos:
             slowmode = 0.2; //slower
         }
         else if (gamepad1.left_bumper){
-            slowmode = 1; //normal
+            slowmode = 0.7; //normal
         }
 
         LPower = slowmode * gamepad1.left_stick_y;
@@ -96,14 +96,14 @@ Servos:
         RPower = slowmode * gamepad1.right_stick_y;
         turn = slowmode * gamepad1.right_stick_x;
 
-        BL.setPower(LPower +(2.9 * Left) );//controls driving motors
-        FL.setPower(LPower -(2.7 * Left) );
+        BL.setPower(LPower +(2.6 * Left) );//controls driving motors
+        FL.setPower(LPower -(2.6 * Left) );
         BR.setPower(LPower -(2 * Left));
         FR.setPower(LPower +(2 * Left));
 
         if(RPower != 0 || turn != 0){
-            BL.setPower(LPower -(2.9 * turn) );//controls driving motors
-            FL.setPower(LPower -(2.7 * turn) );
+            BL.setPower(LPower -(2.6 * turn) );//controls driving motors
+            FL.setPower(LPower -(2.6 * turn) );
             BR.setPower(LPower +(2 * turn));
             FR.setPower(LPower +(2 * turn));
         }
@@ -114,11 +114,11 @@ Servos:
         down = gamepad2.left_trigger;
 
         if(gamepad2.right_trigger>0)
-            if( Arm.getCurrentPosition()<=4000 && Arm.getCurrentPosition()>=-500)
+            if( Arm.getCurrentPosition()<=4000 && Arm.getCurrentPosition()>=-1000)
                 Arm.setPower(up);
 
         if(gamepad2.left_trigger>0)
-            if( Arm.getCurrentPosition()<=4500 && Arm.getCurrentPosition()>=0)
+            if( Arm.getCurrentPosition()<=5500 && Arm.getCurrentPosition()>=0)
                 Arm.setPower(-down);
 
         if(!(gamepad2.right_trigger>0 || gamepad2.left_trigger>0))

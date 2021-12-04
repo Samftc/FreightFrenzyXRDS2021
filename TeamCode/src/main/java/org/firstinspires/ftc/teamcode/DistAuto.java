@@ -57,23 +57,23 @@ public class DistAuto extends LinearOpMode {
 
             } else if (distance < 15) {
               //  bot.markus.setPower(0.5);
-                bot.BL.setPower(-0.5);
-                bot.FL.setPower(-0.5);
-                bot.BR.setPower(-0.5);
-                bot.FR.setPower(-0.5);
+                bot.BL.setPower(-0.25);
+                bot.FL.setPower(-0.25);
+                bot.BR.setPower(-0.25);
+                bot.FR.setPower(-0.25);
                // bot.Arm.setPower(0);
             } else  if (distance < 25) {
                // bot.markus.setPower(0.75);
-                bot.BL.setPower(-0.75);
-                bot.FL.setPower(-0.75);
-                bot.BR.setPower(-0.75);
-                bot.FR.setPower(-0.75);
+                bot.BL.setPower(-0.55);
+                bot.FL.setPower(-0.55);
+                bot.BR.setPower(-0.55);
+                bot.FR.setPower(-0.55);
                // bot.Arm.setPower(0);
             } else if (distance >=25) {
-                bot.BL.setPower(-1);
-                bot.FL.setPower(-1);
-                bot.BR.setPower(-1);
-                bot.FR.setPower(-1);
+                bot.BL.setPower(-0.6);
+                bot.FL.setPower(-0.6);
+                bot.BR.setPower(-0.6);
+                bot.FR.setPower(-0.6);
                // bot.markus.setPower(1);
                // bot.Arm.setPower(0);
 
