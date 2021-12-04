@@ -54,6 +54,10 @@ Servos:
         HSR = hardwareMap.servo.get("hand_servo_right");
         HS = hardwareMap.servo.get("hand_servo");
 
+
+        Arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        Arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
         BL.setDirection(DcMotorSimple.Direction.REVERSE);
         FL.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -120,19 +124,39 @@ Servos:
         up = gamepad2.right_trigger;
         down = gamepad2.left_trigger;
 
-        Arm.setPower(up - down);
+        telemetry.addData("up",up);
+        telemetry.addData("down",down);
+
+        if(gamepad2.right_trigger>0)
+            if( Arm.getCurrentPosition()<=4000 && Arm.getCurrentPosition()>=-500)
+                Arm.setPower(up);
+
+        if(gamepad2.left_trigger>0)
+            if( Arm.getCurrentPosition()<=4500 && Arm.getCurrentPosition()>=0)
+                Arm.setPower(down);
+
+        if(!(gamepad2.right_trigger>0 || gamepad2.left_trigger>0))
+            Arm.setPower(0);
 
 
-        if(gamepad2.x){
-            HSL.setPosition(0.3); //sets the servo to closed
-            HSR.setPosition(0.3);
 
+
+
+
+
+
+
+
+        if (gamepad2.y) {
+            //arm close
+            HSR.setPosition(0.70);
+            HSL.setPosition(0.30);
         }
 
         else if(gamepad2.b){
-            HSL.setPosition(-2); //sets the servo to open
+            //arm open
+            HSL.setPosition(-2);
             HSR.setPosition(2);
-
         }
 
         //swivels claw
@@ -158,6 +182,10 @@ Servos:
             //ends claw swivel
         }
 
+
+        telemetry.addData("arm motor", Arm.getCurrentPosition());
+        telemetry.addData("HSR", HSR.getPosition());
+        telemetry.addData("HSL", HSL.getPosition());
         telemetry.addData("Back Left", LPower +(2 * Left) );//displays info in phones
         telemetry.addData("Front Left",LPower -(2 * Left) );
         telemetry.addData("Back Right", LPower -(2 * Left));
