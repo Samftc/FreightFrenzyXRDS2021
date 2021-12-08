@@ -1,0 +1,200 @@
+Index: TeamCode/src/main/java/org/firstinspires/ftc/teamcode/HardwareOmni.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/* Copyright (c) 2017 FIRST. All rights reserved.\n *\n * Redistribution and use in source and binary forms, with or without modification,\n * are permitted (subject to the limitations in the disclaimer below) provided that\n * the following conditions are met:\n *\n * Redistributions of source code must retain the above copyright notice, this list\n * of conditions and the following disclaimer.\n *\n * Redistributions in binary form must reproduce the above copyright notice, this\n * list of conditions and the following disclaimer in the documentation and/or\n * other materials provided with the distribution.\n *\n * Neither the name of FIRST nor the names of its contributors may be used to endorse or\n * promote products derived from this software without specific prior written permission.\n *\n * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS\n * LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n * \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,\n * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\n * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE\n * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\n * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\n * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\n * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\n * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n */\n\npackage org.firstinspires.ftc.teamcode;\n\nimport com.qualcomm.robotcore.hardware.DcMotor;\nimport com.qualcomm.robotcore.hardware.DcMotorSimple;\nimport com.qualcomm.robotcore.hardware.HardwareMap;\nimport com.qualcomm.robotcore.hardware.Servo;\nimport com.qualcomm.robotcore.util.ElapsedTime;\n\n/**\n * This is NOT an opmode.\n *\n * This class can be used to define all the specific hardware for a single robot.\n * In this case that robot is a Pushbot.\n * See PushbotTeleopTank_Iterative and others classes starting with \"Pushbot\" for usage examples.\n *\n * This hardware class assumes the following device names have been configured on the robot:\n * Note:  All names are lower case and some have single spaces between words.\n */\n//crossroads is password to control hub\n          /* Motors:\n  back_right_motor\n  front_right_motor\n  arm_motor\n  front_left_motor\n  back_left_motor\nServos:\n  hand_servo*/\n\n\npublic class HardwareOmni\n{\n    /* Public OpMode members. */\n    public DcMotor  BL   = null;\n    public DcMotor  BR  = null;\n    public DcMotor  FR     = null;\n    public DcMotor  FL     = null;\n    public Servo    HSL    = null;\n    public Servo    HSR  = null;\n\n    public static final double MID_SERVO       =  0.5 ;\n    public static final double ARM_UP_POWER    =  0.45 ;\n    public static final double ARM_DOWN_POWER  = -0.45 ;\n\n    /* local OpMode members. */\n    HardwareMap hwMap           =  null;\n    private ElapsedTime period  = new ElapsedTime();\n\n    /* Constructor */\n    public HardwareOmni(){\n\n    }\n\n    /* Initialize standard Hardware interfaces */\n    public void init(HardwareMap ahwMap) {\n        // Save reference to Hardware map\n        hwMap = ahwMap;\n\n        // Define and Initialize Motors\n        BL  = hwMap.get(DcMotor.class, \"back_left_motor\");\n        BR = hwMap.get(DcMotor.class, \"back_right_motor\");\n        FL = hwMap.get(DcMotor.class, \"front_left_motor\");\n        FR = hwMap.get(DcMotor.class, \"front_right_motor\");\n        BL.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors\n        FL.setDirection(DcMotorSimple.Direction.REVERSE);\n\n        // Set all motors to zero power\n      BR.setPower(0);\n      BL.setPower(0);\n      FR.setPower(0);\n      FL.setPower(0);\n\n\n        // Set all motors to run without encoders.\n        // May want to use RUN_USING_ENCODERS if encoders are installed.\n        BR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);\n        BL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);\n        FR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);\n        FL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);\n\n        // Define and initialize ALL installed servos.\n       HSL  = hwMap.get(Servo.class, \"hand_servo_left\");\n       HSR = hwMap.get(Servo.class, \"hand_servo_right\");\n    }\n }\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/HardwareOmni.java b/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/HardwareOmni.java
+--- a/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/HardwareOmni.java	(revision 0ddacd6adf01a9a0a55cf808a1752fcde7c9ad3e)
++++ b/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/HardwareOmni.java	(date 1638393871644)
+@@ -63,6 +63,7 @@
+     public DcMotor  BR  = null;
+     public DcMotor  FR     = null;
+     public DcMotor  FL     = null;
++    public DcMotor  Arm     = null;
+     public Servo    HSL    = null;
+     public Servo    HSR  = null;
+ 
+@@ -89,6 +90,7 @@
+         BR = hwMap.get(DcMotor.class, "back_right_motor");
+         FL = hwMap.get(DcMotor.class, "front_left_motor");
+         FR = hwMap.get(DcMotor.class, "front_right_motor");
++        Arm = hwMap.get(DcMotor.class, "arm_motor");
+         BL.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
+         FL.setDirection(DcMotorSimple.Direction.REVERSE);
+ 
+@@ -97,6 +99,7 @@
+       BL.setPower(0);
+       FR.setPower(0);
+       FL.setPower(0);
++      Arm.setPower(0);
+ 
+ 
+         // Set all motors to run without encoders.
+@@ -105,6 +108,7 @@
+         BL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+         FR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+         FL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
++        Arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+ 
+         // Define and initialize ALL installed servos.
+        HSL  = hwMap.get(Servo.class, "hand_servo_left");
+Index: TeamCode/src/main/java/org/firstinspires/ftc/teamcode/dist.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*\nCopyright (c) 2018 FIRST\n\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification,\nare permitted (subject to the limitations in the disclaimer below) provided that\nthe following conditions are met:\n\nRedistributions of source code must retain the above copyright notice, this list\nof conditions and the following disclaimer.\n\nRedistributions in binary form must reproduce the above copyright notice, this\nlist of conditions and the following disclaimer in the documentation and/or\nother materials provided with the distribution.\n\nNeither the name of FIRST nor the names of its contributors may be used to\nendorse or promote products derived from this software without specific prior\nwritten permission.\n\nNO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS\nLICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n\"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,\nTHE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE\nARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR\nTORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF\nTHIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n*/\npackage org.firstinspires.ftc.teamcode;\n\nimport com.qualcomm.hardware.rev.Rev2mDistanceSensor;\nimport com.qualcomm.robotcore.eventloop.opmode.Disabled;\nimport com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;\nimport com.qualcomm.robotcore.eventloop.opmode.TeleOp;\nimport com.qualcomm.robotcore.hardware.DcMotor;\nimport com.qualcomm.robotcore.hardware.DistanceSensor;\n\nimport org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;\n\n/**\n * {@link dist} illustrates how to use the REV Robotics\n * Time-of-Flight Range Sensor.\n *\n * The op mode assumes that the range sensor is configured with a name of \"sensor_range\".\n *\n * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.\n * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list\n *\n * @see <a href=\"http://revrobotics.com\">REV Robotics Web Page</a>\n */\n@TeleOp(name = \"dist\", group = \"Sensor\")\n//Disabled\npublic class dist extends LinearOpMode {\n\n    double distance;\n    DcMotor BR;\n\n\n    private DistanceSensor sensorRange;\n\n    @Override\n    public void runOpMode() {\n        // you can use this as a regular DistanceSensor.\n        sensorRange = hardwareMap.get(DistanceSensor.class, \"steven\");\n\n        // you can also cast this to a Rev2mDistanceSensor if you want to use added\n        // methods associated with the Rev2mDistanceSensor class.\n        Rev2mDistanceSensor sensorTimeOfFlight = (Rev2mDistanceSensor)sensorRange;\n\n        telemetry.addData(\">>\", \"Press start to continue\");\n        telemetry.update();\n\n        waitForStart();\n        while(opModeIsActive()) {\n            // generic DistanceSensor methods.\n\n            BR = hardwareMap.dcMotor.get(\"back_right_motor\");\n\n            telemetry.addData(\"deviceName\",sensorRange.getDeviceName() );\n            telemetry.addData(\"range\", String.format(\"%.01f cm\", sensorRange.getDistance(DistanceUnit.CM)));\n            distance = sensorRange.getDistance(DistanceUnit.CM);\n\n            telemetry.addData(\"distance\", distance);\n\n\n\n            // Rev2mDistanceSensor specific methods.\n            telemetry.addData(\"ID\", String.format(\"%x\", sensorTimeOfFlight.getModelID()));\n            telemetry.addData(\"did time out\", Boolean.toString(sensorTimeOfFlight.didTimeoutOccur()));\n\n            telemetry.update();\n            if (distance < 10) {\n                BR.setPower(1);\n            } else {\n                BR.setPower(0);\n            }\n\n        }\n\n    }\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/dist.java b/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/dist.java
+--- a/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/dist.java	(revision 0ddacd6adf01a9a0a55cf808a1752fcde7c9ad3e)
++++ b/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/dist.java	(date 1638393168161)
+@@ -93,10 +93,12 @@
+             telemetry.addData("did time out", Boolean.toString(sensorTimeOfFlight.didTimeoutOccur()));
+ 
+             telemetry.update();
+-            if (distance < 10) {
+-                BR.setPower(1);
+-            } else {
++
++            if (distance < 5) {
+                 BR.setPower(0);
++
++            } else {
++                BR.setPower(1);
+             }
+ 
+         }
+Index: TeamCode/src/main/java/org/firstinspires/ftc/teamcode/armtest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.firstinspires.ftc.teamcode;\n\nimport com.qualcomm.robotcore.eventloop.opmode.OpMode;\nimport com.qualcomm.robotcore.eventloop.opmode.TeleOp;\nimport com.qualcomm.robotcore.hardware.DcMotor;\nimport com.qualcomm.robotcore.hardware.Servo;\n\n\n@TeleOp(name = \"armtest\", group = \"Sensor\")\npublic class armtest extends OpMode {\n    DcMotor A;\n    DcMotor FL;\n    DcMotor BL;\n    DcMotor BR;\n    DcMotor FR;\n    com.qualcomm.robotcore.hardware.Servo HS;\n    com.qualcomm.robotcore.hardware.Servo HSL;\n    com.qualcomm.robotcore.hardware.Servo HSR;\n\n\n    double LPower;\n    double RPower;\n    double Left;\n    double turn;\n    double slowmode = 1;\n    double Turn;\n    double Servo;\n    double up;\n    double down;\n    double pos;\n    boolean go = false;\n    double i;\n    double j;\n\n    @Override\n    public void init() {\n        HSL = hardwareMap.servo.get(\"hand_servo_left\");\n        HSR = hardwareMap.servo.get(\"hand_servo_right\");\n    }\n\n    @Override\n    public void loop() {\n        telemetry.addData(\"HSR\", \"\" + i);\n        telemetry.addData(\"HSL\", \"\" + j);\n\n\n        if (gamepad1.y) {\n            //arm close\n            i = 0.70;//right\n            j = 0.30;//left\n            HSR.setPosition(i);\n            HSL.setPosition(j);\n        }\n\n        if (gamepad1.a) {\n            //arm open\n            i = 1; //right\n            j = 0; //left\n            HSR.setPosition(i);\n            HSL.setPosition(j);\n        }\n\n\n        if (gamepad1.b) {\n            //arm close gradually\n            if (i > 0.70)\n                i -= 0.005;\n            if (j < 0.30)\n                i += 0.005;\n            HSR.setPosition(i);\n            HSL.setPosition(j);\n        }\n        if (gamepad1.x) {\n            //arm open gradually\n            if (i < 1)\n                i += 0.005;\n            if (j > 0)\n                i -= 0.005;\n            HSR.setPosition(i);\n            HSL.setPosition(j);\n        }\n        if (gamepad1.left_trigger == 1) {\n            HSR.setPosition(1);\n            HSL.setPosition(-1);\n        }\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/armtest.java b/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/armtest.java
+--- a/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/armtest.java	(revision 0ddacd6adf01a9a0a55cf808a1752fcde7c9ad3e)
++++ b/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/armtest.java	(date 1638393168174)
+@@ -65,7 +65,7 @@
+             //arm close gradually
+             if (i > 0.70)
+                 i -= 0.005;
+-            if (j < 0.30)
++            if (j < 0.30)  
+                 i += 0.005;
+             HSR.setPosition(i);
+             HSL.setPosition(j);
+Index: TeamCode/src/main/java/org/firstinspires/ftc/teamcode/DistAuto.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/DistAuto.java b/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/DistAuto.java
+new file mode 100644
+--- /dev/null	(date 1638394010285)
++++ b/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/DistAuto.java	(date 1638394010285)
+@@ -0,0 +1,64 @@
++package org.firstinspires.ftc.teamcode;
++
++import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
++import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
++import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
++import com.qualcomm.robotcore.hardware.DistanceSensor;
++
++import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
++
++@Autonomous (name = "DistAuto")
++
++public class DistAuto extends LinearOpMode {
++
++    HardwareOmni bot = new HardwareOmni();
++
++
++    @Override
++    public void runOpMode() {
++        bot.init(hardwareMap);
++
++        // you can use this as a regular DistanceSensor.
++        DistanceSensor sensorRange = hardwareMap.get(DistanceSensor.class, "steven");
++
++        // you can also cast this to a Rev2mDistanceSensor if you want to use added
++        // methods associated with the Rev2mDistanceSensor class.
++        Rev2mDistanceSensor sensorTimeOfFlight = (Rev2mDistanceSensor) sensorRange;
++
++        telemetry.addData(">>", "Press start to continue");
++        telemetry.update();
++
++        waitForStart();
++        while (opModeIsActive()) {
++            // generic DistanceSensor methods.
++
++            bot.BR = hardwareMap.dcMotor.get("back_right_motor");
++
++            telemetry.addData("deviceName", sensorRange.getDeviceName());
++            telemetry.addData("range", String.format("%.01f cm", sensorRange.getDistance(DistanceUnit.CM)));
++            double distance = sensorRange.getDistance(DistanceUnit.CM);
++
++            telemetry.addData("distance", distance);
++
++
++            // Rev2mDistanceSensor specific methods.
++            telemetry.addData("ID", String.format("%x", sensorTimeOfFlight.getModelID()));
++            telemetry.addData("did time out", Boolean.toString(sensorTimeOfFlight.didTimeoutOccur()));
++
++            telemetry.update();
++bot.BR.setPower(1);
++            if (distance < 15) {
++                bot.BR.setPower(0.75);
++
++            }  if (distance < 10) {
++                bot.BR.setPower(0.5);
++            }   if (distance < 8) {
++                bot.BR.setPower(0);
++                bot.Arm.setPower(1);
++            }
++
++
++        }
++
++    }
++}
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_8\" default=\"true\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\n  </component>\n  <component name=\"ProjectType\">\n    <option name=\"id\" value=\"Android\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 0ddacd6adf01a9a0a55cf808a1752fcde7c9ad3e)
++++ b/.idea/misc.xml	(date 1638393168193)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"CompilerConfiguration\">\n    <bytecodeTargetLevel target=\"1.8\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+--- a/.idea/compiler.xml	(revision 0ddacd6adf01a9a0a55cf808a1752fcde7c9ad3e)
++++ b/.idea/compiler.xml	(date 1638393168200)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="CompilerConfiguration">
+-    <bytecodeTargetLevel target="1.8" />
++    <bytecodeTargetLevel target="11" />
+   </component>
+ </project>
+\ No newline at end of file
