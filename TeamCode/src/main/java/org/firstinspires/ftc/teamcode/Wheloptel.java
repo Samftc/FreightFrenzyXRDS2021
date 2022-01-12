@@ -96,14 +96,14 @@ Servos:
         RPower = slowmode * gamepad1.right_stick_y;
         turn = slowmode * gamepad1.right_stick_x;
 
-        BL.setPower(LPower +(2.6 * Left) );//controls driving motors
-        FL.setPower(LPower -(2.6 * Left) );
+        BL.setPower(LPower +(2 * Left) );//controls driving motors
+        FL.setPower(LPower -(2 * Left) );
         BR.setPower(LPower -(2 * Left));
         FR.setPower(LPower +(2 * Left));
 
         if(RPower != 0 || turn != 0){
-            BL.setPower(LPower -(2.6 * turn) );//controls driving motors
-            FL.setPower(LPower -(2.6 * turn) );
+            BL.setPower(LPower -(2 * turn) );//controls driving motors
+            FL.setPower(LPower -(2 * turn) );
             BR.setPower(LPower +(2 * turn));
             FR.setPower(LPower +(2 * turn));
         }
