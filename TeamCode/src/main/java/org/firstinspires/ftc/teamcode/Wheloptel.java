@@ -140,7 +140,6 @@ Servos:
 
 
         //telemety
-        //
 
         telemetry.addData("right trigger", gamepad2.right_trigger);
         telemetry.addData("left trigger", gamepad2.left_trigger);
