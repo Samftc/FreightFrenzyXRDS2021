@@ -35,6 +35,7 @@ public class DistAuto extends LinearOpMode {
             bot.BR = hardwareMap.dcMotor.get("back_right_motor");
 
             //variable for starting duck arm program
+
             boolean InDuckRange = false;
 
             telemetry.addData("deviceName", sensorRange.getDeviceName());
@@ -60,23 +61,23 @@ public class DistAuto extends LinearOpMode {
 
             } else if (distance < 15) {
               //  bot.markus.setPower(0.5);
-                bot.BL.setPower(-0.25 * 1.25);
-                bot.FL.setPower(-0.25 * 1.25);
-                bot.BR.setPower(-0.25 * 1.25);
-                bot.FR.setPower(-0.25 * 1.25);
+                bot.BL.setPower(-0.25); //* 1.25);
+                bot.FL.setPower(-0.25); //* 1.25);
+                bot.BR.setPower(-0.25);// * 1.25);
+                bot.FR.setPower(-0.25);// * 1.25);
                // bot.Arm.setPower(0);
             } else  if (distance < 25) {
                // bot.markus.setPower(0.75);
-                bot.BL.setPower(-0.55 * 1.25);
-                bot.FL.setPower(-0.55 * 1.25);
-                bot.BR.setPower(-0.55 * 1.25);
-                bot.FR.setPower(-0.55 * 1.25);
+                bot.BL.setPower(-0.55);// * 1.25);
+                bot.FL.setPower(-0.55);// * 1.25);
+                bot.BR.setPower(-0.55);// * 1.25);
+                bot.FR.setPower(-0.55);// * 1.25);
                // bot.Arm.setPower(0);
             } else if (distance >=25) {
-                bot.BL.setPower(-0.6 * 1.25);
-                bot.FL.setPower(-0.6 * 1.25);
-                bot.BR.setPower(-0.6 * 1.25);
-                bot.FR.setPower(-0.6 * 1.25);
+                bot.BL.setPower(-0.6);// * 1.25);
+                bot.FL.setPower(-0.6);// * 1.25);
+                bot.BR.setPower(-0.6);// * 1.25);
+                bot.FR.setPower(-0.6);// * 1.25);
                 InDuckRange = true;
                // bot.markus.setPower(1);
                // bot.Arm.setPower(0);
