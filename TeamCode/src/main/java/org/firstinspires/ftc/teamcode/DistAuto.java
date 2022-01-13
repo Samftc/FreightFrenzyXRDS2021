@@ -34,6 +34,9 @@ public class DistAuto extends LinearOpMode {
 
             bot.BR = hardwareMap.dcMotor.get("back_right_motor");
 
+            //variable for starting duck arm program
+            boolean InDuckRange = false;
+
             telemetry.addData("deviceName", sensorRange.getDeviceName());
             telemetry.addData("range", String.format("%.01f cm", sensorRange.getDistance(DistanceUnit.CM)));
             double distance = sensorRange.getDistance(DistanceUnit.CM);
@@ -57,27 +60,31 @@ public class DistAuto extends LinearOpMode {
 
             } else if (distance < 15) {
               //  bot.markus.setPower(0.5);
-                bot.BL.setPower(-0.25);
-                bot.FL.setPower(-0.25);
-                bot.BR.setPower(-0.25);
-                bot.FR.setPower(-0.25);
+                bot.BL.setPower(-0.25 * 1.25);
+                bot.FL.setPower(-0.25 * 1.25);
+                bot.BR.setPower(-0.25 * 1.25);
+                bot.FR.setPower(-0.25 * 1.25);
                // bot.Arm.setPower(0);
             } else  if (distance < 25) {
                // bot.markus.setPower(0.75);
-                bot.BL.setPower(-0.55);
-                bot.FL.setPower(-0.55);
-                bot.BR.setPower(-0.55);
-                bot.FR.setPower(-0.55);
+                bot.BL.setPower(-0.55 * 1.25);
+                bot.FL.setPower(-0.55 * 1.25);
+                bot.BR.setPower(-0.55 * 1.25);
+                bot.FR.setPower(-0.55 * 1.25);
                // bot.Arm.setPower(0);
             } else if (distance >=25) {
-                bot.BL.setPower(-0.6);
-                bot.FL.setPower(-0.6);
-                bot.BR.setPower(-0.6);
-                bot.FR.setPower(-0.6);
+                bot.BL.setPower(-0.6 * 1.25);
+                bot.FL.setPower(-0.6 * 1.25);
+                bot.BR.setPower(-0.6 * 1.25);
+                bot.FR.setPower(-0.6 * 1.25);
+                InDuckRange = true;
                // bot.markus.setPower(1);
                // bot.Arm.setPower(0);
 
                     }
+            while (InDuckRange = true) {
+                bot.Arm.setPower(1);
+            }
                 }
             }
 
