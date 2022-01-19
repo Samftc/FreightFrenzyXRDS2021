@@ -56,6 +56,7 @@ public class DistAuto extends LinearOpMode {
                 bot.FL.setPower(0);
                 bot.BR.setPower(0);
                 bot.FR.setPower(0);
+                InDuckRange = true;
 
                // bot.Arm.setPower(1);
 
@@ -78,7 +79,7 @@ public class DistAuto extends LinearOpMode {
                 bot.FL.setPower(-0.6);// * 1.25);
                 bot.BR.setPower(-0.6);// * 1.25);
                 bot.FR.setPower(-0.6);// * 1.25);
-                InDuckRange = true;
+
                // bot.markus.setPower(1);
                // bot.Arm.setPower(0);
 
