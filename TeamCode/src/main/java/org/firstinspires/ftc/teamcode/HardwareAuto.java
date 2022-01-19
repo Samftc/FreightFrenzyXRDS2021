@@ -27,7 +27,17 @@ public class HardwareAuto extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         bot.init(hardwareMap);
         bot.markus.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bot.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bot.BL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bot.FL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bot.FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+
         bot.markus.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        bot.BR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        bot.BL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        bot.FR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        bot.FL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
         waitForStart();
@@ -55,8 +65,19 @@ public class HardwareAuto extends LinearOpMode {
 
     private void duckdrive(double speed, int forward, int reverse, boolean duckwheel, double extrawait) {
         bot.markus.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bot.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bot.BL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bot.FL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bot.FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
 
         bot.markus.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        bot.BR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        bot.BL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        bot.FR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        bot.FL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
 
 
 
@@ -68,8 +89,6 @@ public class HardwareAuto extends LinearOpMode {
         }
 
 
-
-        bot.markus.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
 
         bot.markus.setPower(speed);
@@ -113,19 +132,6 @@ public class HardwareAuto extends LinearOpMode {
         }
 
 
-        if (extrawait > 0){
-            runtime.reset();
-            while(extrawait < getRuntime()){
-                try {
-                    TimeUnit.SECONDS.sleep(7);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                extrawait = getRuntime()+1;
-                telemetry.addData("time",getRuntime());
-                telemetry.update();
-            }
-        }
     }
 
 
