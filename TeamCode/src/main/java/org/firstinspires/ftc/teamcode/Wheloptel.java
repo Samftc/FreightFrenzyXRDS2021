@@ -139,7 +139,7 @@ Servos:
             HSL.setPosition(-2);
             HSR.setPosition(2);
         }
-        if (gamepad2.left_bumper){
+        if (gamepad2.left_bumper){//spins duck motor
             duc.setPower(1);
         }
         else if (gamepad2.right_bumper){
