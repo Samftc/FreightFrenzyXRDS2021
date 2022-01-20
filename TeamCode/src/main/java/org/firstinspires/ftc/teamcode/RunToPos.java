@@ -47,7 +47,7 @@ public class RunToPos extends LinearOpMode {
         waitForStart();
 
 
-        drive(-0.5,-2000);
+        drive(-0.5,-2200);
         //turn(1,2100); //turn part is useless, 2,100 should be 90°
 
         waitseconds(5, 1);
@@ -105,9 +105,9 @@ public class RunToPos extends LinearOpMode {
         FL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        BL.setTargetPosition(omni);
+        BL.setTargetPosition(-omni);
         BR.setTargetPosition(omni);
-        FL.setTargetPosition(-omni);
+        FL.setTargetPosition(omni);
         FR.setTargetPosition(-omni);
 
         BL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -118,11 +118,11 @@ public class RunToPos extends LinearOpMode {
 
         while(Math.abs(om) < Math.abs(omni) && !isStopRequested()){
 
-            om = BL.getCurrentPosition(); //om is basically pos
+            om = FL.getCurrentPosition(); //om is basically pos
 
 
-            BL.setPower(1);
-            FL.setPower(-1);
+            BL.setPower(-1);
+            FL.setPower(1);
             FR.setPower(-1);
             BR.setPower(1);
 
