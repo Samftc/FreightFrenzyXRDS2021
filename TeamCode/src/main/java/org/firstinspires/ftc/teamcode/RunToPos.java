@@ -15,6 +15,7 @@ public class RunToPos extends LinearOpMode {
     double pos;
     int rotate;
     double sop;
+    double om;
 
 
     @Override
@@ -43,22 +44,19 @@ public class RunToPos extends LinearOpMode {
         drive(-1,-4000);
         drive(-0.4,-500);
 
-        //turn(1); //true or false for now
+        //turn(1,2100); //turn part is useless, 2,100 should be 90°
 
         waitseconds(5, 1);
 
         drive(1,7000);
 
 
-        //omniturn(1);
+       //omniturn(2000);
 
     }
 
-    private void turn(int turn) {
+    private void turn(int turn, int rotate) {
 
-        if(turn == 1){
-            rotate = 500;
-        }
 
         BL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -97,7 +95,42 @@ public class RunToPos extends LinearOpMode {
 
     }
 
-    private void omniturn(int i) {
+    private void omniturn(int omni) { //omni is similar to rotate, but for omni wheels
+
+        BL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        FL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        BL.setTargetPosition(omni);
+        BR.setTargetPosition(omni);
+        FL.setTargetPosition(-omni);
+        FR.setTargetPosition(-omni);
+
+        BL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        BR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        FL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        FR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+
+        while(Math.abs(om) < Math.abs(omni) && !isStopRequested()){
+
+            om = BL.getCurrentPosition(); //om is basically pos
+
+
+            BL.setPower(1);
+            FL.setPower(-1);
+            FR.setPower(-1);
+            BR.setPower(1);
+
+
+
+            telemetry.addData("pos", pos);
+            telemetry.update();
+
+
+        }
+
 
     }
 
