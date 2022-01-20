@@ -41,14 +41,14 @@ public class RunToPos extends LinearOpMode {
         waitForStart();
 
 
-        drive(-1,-4000);
-        drive(-0.4,-500);
+        drive(-1,-2000);
+        drive(-0.4,-1000);
 
         //turn(1,2100); //turn part is useless, 2,100 should be 90°
 
         waitseconds(5, 1);
 
-        drive(1,7000);
+        drive(1,4000);
 
 
        //omniturn(2000);
