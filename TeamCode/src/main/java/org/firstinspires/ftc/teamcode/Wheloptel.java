@@ -129,7 +129,7 @@ Servos:
 
         //arm servo program
         if (gamepad2.y) {
-            //arm close
+            //arm closes
             HSR.setPosition(0.70);
             HSL.setPosition(0.30);
         }
