@@ -1,11 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
-@TeleOp(name = "RunToPos")
+@Autonomous(name = "RunToPos")
 public class RunToPos extends LinearOpMode {
     //FreightBot motors
     DcMotorEx BL, FL, FR, BR, arm, duc;
@@ -13,6 +14,7 @@ public class RunToPos extends LinearOpMode {
     double time;
     double pos;
     int rotate;
+    double sop;
 
 
     @Override
@@ -71,6 +73,24 @@ public class RunToPos extends LinearOpMode {
         BL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         FL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         FR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        while(Math.abs(sop) < Math.abs(rotate) && !isStopRequested()){
+
+            sop = BL.getCurrentPosition();
+
+
+            BL.setPower(1);
+            FL.setPower(1);
+            FR.setPower(-1);
+            BR.setPower(-1);
+
+
+
+            telemetry.addData("pos", pos);
+            telemetry.update();
+
+
+        }
 
 
 
