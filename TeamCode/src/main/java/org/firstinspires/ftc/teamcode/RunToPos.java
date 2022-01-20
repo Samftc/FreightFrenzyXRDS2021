@@ -41,8 +41,8 @@ public class RunToPos extends LinearOpMode {
         waitForStart();
 
 
-        drive(-1,-1000);
-        drive(-0.4,-500);
+        drive(-7,-1000);
+        drive(-0.4,-1000);
 
         //turn(1,2100); //turn part is useless, 2,100 should be 90°
 
