@@ -41,6 +41,7 @@ public class RunToPos extends LinearOpMode {
 
 
         drive(-1,-4000);
+        drive(-0.4,-500);
 
         //turn(1); //true or false for now
 
@@ -128,7 +129,7 @@ public class RunToPos extends LinearOpMode {
 
     }
 
-    private void drive(int speed, int distance) {
+    private void drive(double speed, int distance) {
 
         BL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
