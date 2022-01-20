@@ -42,7 +42,7 @@ public class RunToPos extends LinearOpMode {
 
         drive(-1,-4000);
 
-        turn(1); //true or false for now
+        //turn(1); //true or false for now
 
         waitseconds(5, 1);
 
@@ -118,7 +118,7 @@ public class RunToPos extends LinearOpMode {
             FR.setPower(0);
 
             if (duck == 1) {
-                duc.setPower(-0.5);
+                duc.setPower(1);
             }
             else if (duck == 0){
                 duc.setPower(0);
@@ -158,6 +158,7 @@ public class RunToPos extends LinearOpMode {
             else {
                 pos = BL.getCurrentPosition()- 10;
             }
+            duc.setPower(0);
 
 
 
@@ -167,6 +168,8 @@ public class RunToPos extends LinearOpMode {
             BR.setPower(speed);
             FL.setPower(speed);
             FR.setPower(speed);
+
+
 
 
 
