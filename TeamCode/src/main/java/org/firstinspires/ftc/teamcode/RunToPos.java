@@ -42,7 +42,7 @@ public class RunToPos extends LinearOpMode {
 
         drive(-1,-4000);
 
-        //turn(1); //true or false for now
+        turn(1); //true or false for now
 
         waitseconds(5, 1);
 
@@ -69,8 +69,8 @@ public class RunToPos extends LinearOpMode {
         FL.setTargetPosition(-rotate);
         FR.setTargetPosition(-rotate);
 
-        BR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         BL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        BR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         FL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         FR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
@@ -111,6 +111,12 @@ public class RunToPos extends LinearOpMode {
             telemetry.addData("time", time);
             telemetry.addData("seconds", seconds);
             telemetry.update();
+
+            BL.setPower(0);
+            BR.setPower(0);
+            FL.setPower(0);
+            FR.setPower(0);
+
             if (duck == 1) {
                 duc.setPower(-0.5);
             }
