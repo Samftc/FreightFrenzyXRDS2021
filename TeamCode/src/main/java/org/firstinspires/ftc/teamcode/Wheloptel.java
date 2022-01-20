@@ -15,6 +15,7 @@ public class Wheloptel extends OpMode {
     DcMotor BL;
     DcMotor BR;
     DcMotor FR;
+    DcMotor duc;
     com.qualcomm.robotcore.hardware.Servo HS;
     com.qualcomm.robotcore.hardware.Servo HSL;
     com.qualcomm.robotcore.hardware.Servo HSR;
@@ -50,6 +51,7 @@ Servos:
         Arm = hardwareMap.dcMotor.get("arm_motor");
         FL = hardwareMap.dcMotor.get("front_left_motor");
         BL = hardwareMap.dcMotor.get("back_left_motor");
+        duc = hardwareMap.dcMotor.get("duck");
         HSL = hardwareMap.servo.get("hand_servo_left");
         HSR = hardwareMap.servo.get("hand_servo_right");
         HS = hardwareMap.servo.get("hand_servo");
@@ -127,7 +129,7 @@ Servos:
 
         //arm servo program
         if (gamepad2.y) {
-            //arm close
+            //arm closes
             HSR.setPosition(0.70);
             HSL.setPosition(0.30);
         }
@@ -136,6 +138,12 @@ Servos:
             //arm open
             HSL.setPosition(-2);
             HSR.setPosition(2);
+        }
+        if (gamepad2.left_bumper){//spins duck motor
+            duc.setPower(1);
+        }
+        else if (gamepad2.right_bumper){
+            duc.setPower(0);
         }
 
 
