@@ -47,18 +47,14 @@ public class RunToPos extends LinearOpMode {
         waitForStart();
 
 
-        drive(-7,-1000);
-        waitseconds(1, 0);
-        drive(-0.4,-1000);
-
+        drive(-0.5,-2000);
         //turn(1,2100); //turn part is useless, 2,100 should be 90°
 
         waitseconds(5, 1);
 
-        drive(0.5,4000);
+        //drive(0.5,4000);
 
-
-       //omniturn(2000);
+        omniturn(2000);
 
     }
 
@@ -159,7 +155,7 @@ public class RunToPos extends LinearOpMode {
             FR.setPower(0);
 
             if (duck == 1) {
-                duc.setPower(1);
+                duc.setPower(0.5);
             }
             else if (duck == 0){
                 duc.setPower(0);
