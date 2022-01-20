@@ -24,6 +24,12 @@ public class RunToPos extends LinearOpMode {
         FL = hardwareMap.get(DcMotorEx.class, "front_left_motor");
         FR = hardwareMap.get(DcMotorEx.class, "front_right_motor");
         BR = hardwareMap.get(DcMotorEx.class, "back_right_motor");
+
+        BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         BL.setDirection(DcMotor.Direction.REVERSE);
         FL.setDirection(DcMotor.Direction.REVERSE);
 
@@ -42,13 +48,14 @@ public class RunToPos extends LinearOpMode {
 
 
         drive(-7,-1000);
+        waitseconds(1, 0);
         drive(-0.4,-1000);
 
         //turn(1,2100); //turn part is useless, 2,100 should be 90°
 
         waitseconds(5, 1);
 
-        drive(1,4000);
+        drive(0.5,4000);
 
 
        //omniturn(2000);
