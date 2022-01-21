@@ -1,5 +1,4 @@
 package org.firstinspires.ftc.teamcode;
-
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -18,7 +17,7 @@ public class DistAuto extends LinearOpMode {
     public void runOpMode() {
         bot.init(hardwareMap);
 
-        // you can use this as a regular DistanceSensor.
+        // you can use this as a r  egular DistanceSensor.
         DistanceSensor sensorRange = hardwareMap.get(DistanceSensor.class, "steven");
 
         // you can also cast this to a Rev2mDistanceSensor if you want to use added
@@ -39,19 +38,19 @@ public class DistAuto extends LinearOpMode {
             boolean InDuckRange = false;
 
             telemetry.addData("deviceName", sensorRange.getDeviceName());
-            telemetry.addData("range", String.format("%.01f cm", sensorRange.getDistance(DistanceUnit.CM)));
-            double distance = sensorRange.getDistance(DistanceUnit.CM);
+            telemetry.addData("range", String.format("%.01f in", sensorRange.getDistance(DistanceUnit.INCH)));
+            double distance = sensorRange.getDistance(DistanceUnit.INCH);
 
             telemetry.addData("distance", distance);
             telemetry.addData("markus",""+bot.markus.getPower());
 
             // Rev2mDistanceSensor specific methods.
             telemetry.addData("ID", String.format("%x", sensorTimeOfFlight.getModelID()));
-            telemetry.addData("did time out", Boolean.toString(sensorTimeOfFlight.didTimeoutOccur()));
+            telemetry.addData(" did time out", Boolean.toString(sensorTimeOfFlight.didTimeoutOccur()));
 
             telemetry.update();
 
-            if (distance < 10) {
+            if (distance <= 8) {
                 bot.BL.setPower(0);
                 bot.FL.setPower(0);
                 bot.BR.setPower(0);
@@ -80,13 +79,21 @@ public class DistAuto extends LinearOpMode {
                 bot.BR.setPower(-0.6);// * 1.25);
                 bot.FR.setPower(-0.6);// * 1.25);
 
-               // bot.markus.setPower(1);
-               // bot.Arm.setPower(0);
+               // bot.Arm.setPower(1);
+
+
+
+            } else if (distance >=8) {
+                bot.BL.setPower(-0.2);// * 1.25);
+                bot.FL.setPower(-0.2);// * 1.25);
+                bot.BR.setPower(-0.2);// * 1.25);
+                bot.FR.setPower(-0.2);// * 1.25);
+                InDuckRange = false;
+
 
                     }
             while (InDuckRange = true) {
-                bot.Arm.setPower(1);
-            }
+             }
                 }
             }
 
