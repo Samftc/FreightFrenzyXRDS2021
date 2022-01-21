@@ -96,10 +96,10 @@ public class HardwareAuto extends LinearOpMode {
         runtime.reset();
 
         if(duckwheel){
-            bot.duck.setPower(1);
+            bot.duc.setPower(1);
         }
         else {
-            bot.duck.setPower(0);
+            bot.duc.setPower(0);
         }
 
 

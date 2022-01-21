@@ -64,7 +64,7 @@ public class HardwareOmni
     public DcMotor  FR     = null;
     public DcMotor  FL     = null;
     public DcMotor  Arm     = null;
-    public DcMotor  duck     = null;
+    public DcMotor  duc     = null;
     public DcMotor  markus     = null;
     public Servo    HSL    = null;
     public Servo    HSR  = null;
@@ -93,8 +93,15 @@ public class HardwareOmni
         FL = hwMap.get(DcMotor.class, "front_left_motor");
         FR = hwMap.get(DcMotor.class, "front_right_motor");
         Arm = hwMap.get(DcMotor.class, "arm_motor");
-        markus = hwMap.get(DcMotor.class, "markus");
-        duck = hwMap.get(DcMotor.class, "duck");
+        duc = hwMap.get(DcMotor.class, "duck");
+
+        BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        Arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
         BL.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
         FL.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -104,8 +111,8 @@ public class HardwareOmni
       FR.setPower(0);
       FL.setPower(0);
       Arm.setPower(0);
-      markus.setPower(0);
-      duck.setPower(0);
+      Arm.setPower(0);
+      duc.setPower(0);
 
 
         // Set all motors to run without encoders.
@@ -115,8 +122,7 @@ public class HardwareOmni
         FR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         FL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         Arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        markus.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        duck.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        duc.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.
        HSL  = hwMap.get(Servo.class, "hand_servo_left");

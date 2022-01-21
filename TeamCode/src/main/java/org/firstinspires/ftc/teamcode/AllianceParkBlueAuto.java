@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
-@Autonomous (name = "DistAuto")
+@Autonomous (name = "AllianceParkBlueAuto")
 
-public class DistAuto extends LinearOpMode {
+public class AllianceParkBlueAuto extends LinearOpMode {
 
     HardwareOmni bot = new HardwareOmni();
 
@@ -19,7 +19,7 @@ public class DistAuto extends LinearOpMode {
         bot.init(hardwareMap);
 
         // you can use this as a regular DistanceSensor.
-        DistanceSensor sensorRange = hardwareMap.get(DistanceSensor.class, "steven");
+        DistanceSensor sensorRange = hardwareMap.get(DistanceSensor.class, "dist");
 
         // you can also cast this to a Rev2mDistanceSensor if you want to use added
         // methods associated with the Rev2mDistanceSensor class.
@@ -32,18 +32,12 @@ public class DistAuto extends LinearOpMode {
         while (opModeIsActive()) {
             // generic DistanceSensor methods.
 
-            bot.BR = hardwareMap.dcMotor.get("back_right_motor");
-
-            //variable for starting duck arm program
-
-            boolean InDuckRange = false;
-
             telemetry.addData("deviceName", sensorRange.getDeviceName());
             telemetry.addData("range", String.format("%.01f cm", sensorRange.getDistance(DistanceUnit.CM)));
             double distance = sensorRange.getDistance(DistanceUnit.CM);
 
             telemetry.addData("distance", distance);
-            telemetry.addData("markus",""+bot.markus.getPower());
+            telemetry.addData("markus", "" + bot.markus.getPower());
 
             // Rev2mDistanceSensor specific methods.
             telemetry.addData("ID", String.format("%x", sensorTimeOfFlight.getModelID()));
@@ -51,44 +45,23 @@ public class DistAuto extends LinearOpMode {
 
             telemetry.update();
 
-            if (distance < 10) {
+            if (distance < 5) {
                 bot.BL.setPower(0);
-                bot.FL.setPower(0);
                 bot.BR.setPower(0);
                 bot.FR.setPower(0);
-                InDuckRange = true;
+                bot.FL.setPower(0);
 
-               // bot.Arm.setPower(1);
 
-            } else if (distance < 15) {
-              //  bot.markus.setPower(0.5);
-                bot.BL.setPower(-0.25); //* 1.25);
-                bot.FL.setPower(-0.25); //* 1.25);
-                bot.BR.setPower(-0.25);// * 1.25);
-                bot.FR.setPower(-0.25);// * 1.25);
-               // bot.Arm.setPower(0);
-            } else  if (distance < 25) {
-               // bot.markus.setPower(0.75);
-                bot.BL.setPower(-0.55);// * 1.25);
-                bot.FL.setPower(-0.55);// * 1.25);
-                bot.BR.setPower(-0.55);// * 1.25);
-                bot.FR.setPower(-0.55);// * 1.25);
-               // bot.Arm.setPower(0);
-            } else if (distance >=25) {
-                bot.BL.setPower(-0.6);// * 1.25);
-                bot.FL.setPower(-0.6);// * 1.25);
-                bot.BR.setPower(-0.6);// * 1.25);
-                bot.FR.setPower(-0.6);// * 1.25);
+                // bot.Arm.setPower(1);
 
-               // bot.markus.setPower(1);
-               // bot.Arm.setPower(0);
-
-                    }
-            while (InDuckRange = true) {
-                bot.Arm.setPower(1);
+            } else if (distance > 5) {
+                bot.BL.setPower(-0.3);
+                bot.BR.setPower(-0.3);
+                bot.FR.setPower(-0.3);
+                bot.FL.setPower(-0.3);
             }
-                }
-            }
-
-
         }
+    }
+
+
+}

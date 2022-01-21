@@ -101,7 +101,10 @@ public class dist extends LinearOpMode {
                 BR.setPower(1);
             }
 
-        }
+
+
+
+            }
 
     }
 
