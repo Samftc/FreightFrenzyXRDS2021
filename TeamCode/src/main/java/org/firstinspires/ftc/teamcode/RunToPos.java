@@ -46,15 +46,21 @@ public class RunToPos extends LinearOpMode {
 
         waitForStart();
 
+        omniturn(1500,true,1);
+
+        waitseconds(5, 1);
+
+        omniturn(1500,false,1);//for omni, right should also be positive
+
 
         drive(-0.5,-2200);
         //turn(1,2100); //turn part is useless, 2,100 should be 90°
 
-        waitseconds(5, 1);
+
 
         //drive(0.5,4000);
 
-        omniturn(2000);
+        omniturn(1500,true,1);
 
     }
 
@@ -98,17 +104,24 @@ public class RunToPos extends LinearOpMode {
 
     }
 
-    private void omniturn(int omni) { //omni is similar to rotate, but for omni wheels
+    private void omniturn(int omni,boolean left,double power) { //omni is similar to rotate, but for omni wheels
 
         BL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         FL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        BL.setTargetPosition(-omni);
-        BR.setTargetPosition(omni);
-        FL.setTargetPosition(omni);
-        FR.setTargetPosition(-omni);
+        if(left) {
+            BL.setTargetPosition(-omni);
+            BR.setTargetPosition(omni);
+            FL.setTargetPosition(omni);
+            FR.setTargetPosition(-omni);
+        } else {
+            BL.setTargetPosition(omni);
+            BR.setTargetPosition(-omni);
+            FL.setTargetPosition(-omni);
+            FR.setTargetPosition(omni);
+        }
 
         BL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         BR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -118,13 +131,24 @@ public class RunToPos extends LinearOpMode {
 
         while(Math.abs(om) < Math.abs(omni) && !isStopRequested()){
 
-            om = FL.getCurrentPosition(); //om is basically pos
 
+            if(left) {
+                om = FL.getCurrentPosition(); //om is basically pos
+            }else{
+                om = BL.getCurrentPosition(); //om is basically pos
+            }
 
-            BL.setPower(-1);
-            FL.setPower(1);
-            FR.setPower(-1);
-            BR.setPower(1);
+            if(left) {
+                BL.setPower(-power);
+                FL.setPower(power);
+                FR.setPower(-power);
+                BR.setPower(power);
+            } else{
+                BL.setPower(power);
+                FL.setPower(-power);
+                FR.setPower(power);
+                BR.setPower(-power);
+            }
 
 
 
