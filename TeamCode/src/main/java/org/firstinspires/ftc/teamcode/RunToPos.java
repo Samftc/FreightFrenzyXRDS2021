@@ -52,6 +52,8 @@ public class RunToPos extends LinearOpMode {
 
         omniturn(1500,false,1);//for omni, right should also be positive
 
+        waitseconds(1, 0);
+
 
         drive(-0.5,-2200);
         //turn(1,2100); //turn part is useless, 2,100 should be 90°
