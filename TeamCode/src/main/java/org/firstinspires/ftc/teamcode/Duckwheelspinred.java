@@ -8,9 +8,9 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
-@Autonomous (name = "Duckwheelspinblue")
+@Autonomous (name = "Duckwheelspinred")
 
-public class Duckwheelspinblue extends LinearOpMode {
+public class Duckwheelspinred extends LinearOpMode {
 
     double distance;
     double om;
@@ -77,7 +77,7 @@ public class Duckwheelspinblue extends LinearOpMode {
                 // bot.Arm.setPower(0);
 
             }
-            omniturn(200,true,1);
+            omniturn(200,false,1);
         }
     }
 
