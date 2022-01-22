@@ -37,7 +37,7 @@ public class Duckwheelspinblue extends LinearOpMode {
 
         resetStartTime();
 
-        while (opModeIsActive() && !isStopRequested() && time < 25) {
+        while (opModeIsActive() && !isStopRequested() && time < 20) {
             // generic DistanceSensor methods.
 
             time = getRuntime();
@@ -88,7 +88,7 @@ public class Duckwheelspinblue extends LinearOpMode {
             }
         }
 
-        omniturn(200,true,1);
+        omniturn(1500,true,1);
     }
 
     private void omniturn(int omni, boolean left, int power) {
