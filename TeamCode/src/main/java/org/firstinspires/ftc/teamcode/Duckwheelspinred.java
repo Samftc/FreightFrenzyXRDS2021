@@ -14,6 +14,7 @@ public class Duckwheelspinred extends LinearOpMode {
 
     double distance;
     double om;
+    double time;
 
     HardwareOmni bot = new HardwareOmni();
 
@@ -33,7 +34,12 @@ public class Duckwheelspinred extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
-        while (opModeIsActive() && !isStopRequested()) {
+
+        resetStartTime();
+
+        while (opModeIsActive() && !isStopRequested() && time < 25) {
+
+            time = getRuntime();
             // generic DistanceSensor methods.
 
             telemetry.addData("deviceName", sensorRange.getDeviceName());
@@ -77,8 +83,8 @@ public class Duckwheelspinred extends LinearOpMode {
                 // bot.Arm.setPower(0);
 
             }
-            omniturn(200,false,1);
         }
+        omniturn(200,false,1);
     }
 
     private void omniturn(int omni, boolean left, int power) {
