@@ -116,7 +116,11 @@ public class HardwareOmni
 
 
         // Set all motors to run without encoders.
-        // May want to use RUN_USING_ENCODERS if encoders are installed.
+        // May want to use RUN_USING_ENCODERS if encoders arBR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //        FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //        Arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //        BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //        FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);e installed.
         BR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         BL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         FR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);

@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
@@ -12,6 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 public class Duckwheelspinblue extends LinearOpMode {
 
     double distance;
+    double om;
 
     HardwareOmni bot = new HardwareOmni();
 
@@ -31,7 +33,7 @@ public class Duckwheelspinblue extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
-        while (opModeIsActive()) {
+        while (opModeIsActive() && !isStopRequested()) {
             // generic DistanceSensor methods.
 
             telemetry.addData("deviceName", sensorRange.getDeviceName());
@@ -75,7 +77,75 @@ public class Duckwheelspinblue extends LinearOpMode {
                 // bot.Arm.setPower(0);
 
             }
+            omniturn(200,false,1);
         }
+    }
+
+    private void omniturn(int omni, boolean left, int power) {
+
+        bot.BL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bot.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bot.FL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bot.FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        if(left) {
+            bot.BL.setTargetPosition(-omni);
+            bot.BR.setTargetPosition(omni);
+            bot.FL.setTargetPosition(omni);
+            bot.FR.setTargetPosition(-omni);
+        } else {
+            bot.BL.setTargetPosition(omni);
+            bot.BR.setTargetPosition(-omni);
+            bot.FL.setTargetPosition(-omni);
+            bot.FR.setTargetPosition(omni);
+        }
+
+        bot.BL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        bot.BR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        bot.FL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        bot.FR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+
+        if(left) {
+            om = bot.FL.getCurrentPosition(); //om is current position of motor
+        }else{
+            om = bot.BL.getCurrentPosition();
+        }
+
+        while(Math.abs(om) < Math.abs(omni) && !isStopRequested()){
+
+
+            if(left) {
+                om = bot.FL.getCurrentPosition();
+            }else{
+                om = bot.BL.getCurrentPosition();
+            }
+
+            if(left) {
+                bot.BL.setPower(-power);
+                bot.FL.setPower(power);
+                bot.FR.setPower(-power);
+                bot.BR.setPower(power);
+            } else{
+                bot.BL.setPower(power);
+                bot.FL.setPower(-power);
+                bot.FR.setPower(power);
+                bot.BR.setPower(-power);
+            }
+
+
+
+            telemetry.addData("om", om); //om is current position of motor
+            telemetry.update();
+
+
+        }
+
+        bot.BR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        bot.BL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        bot.FR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        bot.FL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
     }
 
 }
