@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Autonomous(name = "RunToPos")
 public class RunToPos extends LinearOpMode {
@@ -46,23 +47,30 @@ public class RunToPos extends LinearOpMode {
 
         waitForStart();
 
-        omniturn(1500,true,1);
-
-        waitseconds(5, 1);
-
-        omniturn(1500,false,1);//for omni, right should also be positive
-
-        waitseconds(1, 0);
+        omniturn(100,true,1);
 
 
         drive(-0.5,-2200);
+
+        waitseconds(1, 0);
+
+        omniturn(200,false,1);
+
+        waitseconds(5, 1);
+
+        omniturn(1400,true,1);//for omni, right should also be positive
+
+
+
+
+
         //turn(1,2100); //turn part is useless, 2,100 should be 90°
 
 
 
         //drive(0.5,4000);
 
-        omniturn(1500,true,1);
+       // omniturn(1500,true,1);
 
     }
 
@@ -130,6 +138,12 @@ public class RunToPos extends LinearOpMode {
         FL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         FR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
+
+        if(left) {
+            om = FL.getCurrentPosition(); //om is basically pos
+        }else{
+            om = BL.getCurrentPosition(); //om is basically pos
+        }
 
         while(Math.abs(om) < Math.abs(omni) && !isStopRequested()){
 
