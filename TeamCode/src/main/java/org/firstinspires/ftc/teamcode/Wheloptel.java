@@ -129,7 +129,7 @@ Servos:
 
         //arm servo program
         if (gamepad2.y) {
-            //arm closes
+
             HSR.setPosition(0.70);
             HSL.setPosition(0.30);
         }
@@ -141,8 +141,12 @@ Servos:
         }
         if (gamepad2.left_bumper){//spins duck motor
             duc.setPower(1);
+        }else{
+            duc.setPower(0);
         }
-        else if (gamepad2.right_bumper){
+        if(gamepad2.right_bumper){
+            duc.setPower(1);
+        }else{
             duc.setPower(0);
         }
 

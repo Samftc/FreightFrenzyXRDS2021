@@ -35,7 +35,12 @@ public class Duckwheelspinred extends LinearOpMode {
 
         waitForStart();
 
+        omniturn(25,false,0.5);
+
         resetStartTime();
+
+
+
 
         while (opModeIsActive() && !isStopRequested() && time < 20) {
 
@@ -59,16 +64,16 @@ public class Duckwheelspinred extends LinearOpMode {
                 bot.BR.setPower(0);
                 bot.FR.setPower(0);
                 bot.FL.setPower(0);
-                bot.duc.setPower(0.5);
+                bot.duc.setPower(-0.5);
 
                 // bot.Arm.setPower(1);
 
 
             } else if (distance < 35) {
-                bot.BL.setPower(-0.2);
-                bot.BR.setPower(-0.3);
-                bot.FR.setPower(-0.2);
-                bot.FL.setPower(-0.2);
+                bot.BL.setPower(-0.1);
+                bot.BR.setPower(-0.2);
+                bot.FR.setPower(-0.1);
+                bot.FL.setPower(-0.1);
                 bot.duc.setPower(0);
 
                 // bot.Arm.setPower(0);
@@ -84,10 +89,10 @@ public class Duckwheelspinred extends LinearOpMode {
 
             }
         }
-        omniturn(1500,false,1);
+        omniturn(1300,false,1);
     }
 
-    private void omniturn(int omni, boolean left, int power) {
+    private void omniturn(int omni, boolean left, double power) {
 
         bot.BL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         bot.BR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

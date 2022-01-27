@@ -6,11 +6,14 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous(name = "DriveForward")
 public class DriveForward extends LinearOpMode {
     //FreightBot motors
     DcMotorEx BL, FL, FR, BR, arm, duc;
+    Servo HSL;
+    Servo HSR;
 
     double time;
     double pos;
@@ -25,6 +28,10 @@ public class DriveForward extends LinearOpMode {
         FL = hardwareMap.get(DcMotorEx.class, "front_left_motor");
         FR = hardwareMap.get(DcMotorEx.class, "front_right_motor");
         BR = hardwareMap.get(DcMotorEx.class, "back_right_motor");
+
+        HSL = hardwareMap.servo.get("hand_servo_left");
+        HSR = hardwareMap.servo.get("hand_servo_right");
+
 
         BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -47,7 +54,11 @@ public class DriveForward extends LinearOpMode {
 
         waitForStart();
 
-        omniturn(100,true,1);
+        HSL.setPosition(0);
+        HSR.setPosition(1);
+
+
+        //omniturn(100,true,1);
 
 
         drive(0.5,2000);
