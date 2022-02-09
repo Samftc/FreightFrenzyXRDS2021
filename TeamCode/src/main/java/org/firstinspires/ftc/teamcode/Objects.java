@@ -1,15 +1,19 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name = "Test")
-public class Test extends LinearOpMode {
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+
+@Autonomous(name = "Objects")
+public class Objects extends LinearOpMode {
     //FreightBot motors
     DcMotorEx BL, FL, FR, BR, arm, duc;
     Servo HSL;
@@ -20,6 +24,7 @@ public class Test extends LinearOpMode {
     int rotate;
     double sop;
     double om;
+    int location;
 
 
     @Override
@@ -52,10 +57,36 @@ public class Test extends LinearOpMode {
         time = getRuntime();
 
 
+
+
+
+
+
         waitForStart();
 
         HSL.setPosition(0);
         HSR.setPosition(1);
+
+        //we need the robot to get the distance sensor to the 27 inch mark, the 35, and  44 1/2
+        //distance sensor is 8 1/2 inches from the back (basically 8 1/2 inch head start)
+
+
+        drive(0.5,740); // goes to first object
+        distcode(3,1);
+
+        drive(0.5,320); // goes to second object
+        distcode(3,2);
+
+        if(location != 1 && location != 2){
+            location = 3;
+            duc.setPower(0);
+        }
+
+        waitseconds(5,0);
+
+
+
+
 
 
         //omniturn(100,true,1);// if left is true, then it will go to the left if you're looking at the robot from the servo side
@@ -74,17 +105,17 @@ public class Test extends LinearOpMode {
         // waitseconds(0.5, 0);
 
         //turn(0.5, 2000); // 270° rotation probably
-        turn(0.5, 690); // 90°
+        //turn(0.5, 690); // 90°
 
-        waitseconds(1, 0);
-        turn(0.5, 690); // 90°
+        //waitseconds(1, 0);
+        //turn(0.5, 690); // 90°
 
-        waitseconds(1, 0);
+        //waitseconds(1, 0);
 
-        turn(0.5, 1355); // 180°
+        //turn(0.5, 1355); // 180°
 
-        waitseconds(1, 0);
-        turn(0.5, 2751); // 360° theoretically
+        //waitseconds(1, 0);
+        //turn(0.5, 2751); // 360° theoretically
         //turn(1, 667); // 90° rotation probably
 
         //drive(-0.5,-400);
@@ -117,6 +148,59 @@ public class Test extends LinearOpMode {
         // omniturn(1500,true,1);
 
     }
+
+    private void distcode(double seconds, int loc) {// if the distance sensor sees an object, it does stuff
+
+
+// you can use this as a regular DistanceSensor.
+        DistanceSensor sensorRange = hardwareMap.get(DistanceSensor.class, "dist2");
+
+        // you can also cast this to a Rev2mDistanceSensor if you want to use added
+        // methods associated with the Rev2mDistanceSensor class.
+        Rev2mDistanceSensor sensorTimeOfFlight = (Rev2mDistanceSensor) sensorRange;
+
+        resetStartTime();
+        time = getRuntime();
+
+        while(time < seconds && !isStopRequested()){
+            time = getRuntime();
+            telemetry.addData("time", time);
+            telemetry.addData("seconds", seconds);
+            telemetry.update();
+
+
+
+            telemetry.addData("deviceName", sensorRange.getDeviceName());
+            telemetry.addData("range", String.format("%.01f cm", sensorRange.getDistance(DistanceUnit.CM)));
+            double distance = sensorRange.getDistance(DistanceUnit.CM);
+
+            telemetry.addData("distance", distance);
+
+            // Rev2mDistanceSensor specific methods.
+            telemetry.addData("ID", String.format("%x", sensorTimeOfFlight.getModelID()));
+            telemetry.addData("did time out", Boolean.toString(sensorTimeOfFlight.didTimeoutOccur()));
+
+            telemetry.update();
+
+
+            if(distance < 40 && loc == 1){
+                location = 1;
+                telemetry.addData("location", location);
+                telemetry.update();
+                duc.setPower(0.5);
+
+            }else if (distance < 40 && loc == 2){
+                location = 2;
+                telemetry.addData("location", location);
+                telemetry.update();
+                duc.setPower(0.5);
+            }
+
+        }
+
+
+    }
+
 
     private void turn(double turn, int rotate) {
 
@@ -233,6 +317,7 @@ public class Test extends LinearOpMode {
             time = getRuntime();
             telemetry.addData("time", time);
             telemetry.addData("seconds", seconds);
+            telemetry.addData("location", location);
             telemetry.update();
 
             BL.setPower(0);
