@@ -145,7 +145,7 @@ Servos:
             duc.setPower(0);
         }
         if(gamepad2.right_bumper){
-            duc.setPower(1);
+            duc.setPower(-1);
         }else{
             duc.setPower(0);
         }
