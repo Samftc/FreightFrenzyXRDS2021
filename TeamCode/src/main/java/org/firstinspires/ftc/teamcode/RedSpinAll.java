@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
-@Autonomous(name = "RedSpinAll")
+@Autonomous(name = "RedSpinALl")
 public class RedSpinAll extends LinearOpMode {
     //FreightBot motors
     DcMotorEx BL, FL, FR, BR, arm, duc;
@@ -85,10 +85,10 @@ public class RedSpinAll extends LinearOpMode {
         drive(-0.5, -200);
 
         drive(0.5,740); // goes to first object
-        distcode(3,1);
+        distcode(1,1);
 
         drive(0.5,320); // goes to second object
-        distcode(3,2);
+        distcode(1,2);
 
         if(location != 1 && location != 2){
             location = 3;
@@ -111,15 +111,30 @@ public class RedSpinAll extends LinearOpMode {
         }
 
         if(location == 1){
-            drive(0.5, 460);
+            drive(0.5, 400);
         }else if(location == 2){
-            drive(0.5,460);
+            drive(0.5,400);
         }else if(location ==3){
-            drive(0.5,460);
+            drive(0.5,400);
         }
 
-        HSL.setPosition(1);
-        HSR.setPosition(0);
+        HSR.setPosition(0.70);
+        HSL.setPosition(0.30);
+
+        waitseconds(0.5,0);
+        drive(-0.5,-500);
+        waitseconds(0.5,0);
+        armpdown(-1,-100);//armdown only works for lowering the arm
+
+        drive(-0.5,-1500);
+
+
+        waitseconds(0.5,0);
+
+        waitseconds(0.5,0);
+
+        omniturn(600,false,1);
+
 
 
         //go backworeds
