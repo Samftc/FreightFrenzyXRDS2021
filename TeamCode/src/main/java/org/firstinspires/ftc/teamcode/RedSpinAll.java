@@ -73,17 +73,17 @@ public class RedSpinAll extends LinearOpMode {
         //we need the robot to get the distance sensor to the 27 inch mark, the 35, and  44 1/2
         //distance sensor is 8 1/2 inches from the back (basically 8 1/2 inch head start)
 
-        omniturn(100,false,1);
+        omniturn(300,false,1);
 
         waitseconds(0.5,0);
 
-        drive(-0.5, -180);
+        drive(-0.5, -250);
 
 
         waitseconds(5,-1);
 
 
-        omniturn(2000,false,1);
+        omniturn(1850,false,1);
 
         waitseconds(0.5,0);
 
@@ -92,7 +92,7 @@ public class RedSpinAll extends LinearOpMode {
         drive(0.5,740); // goes to first object
         distcode(1,1);
 
-        drive(0.5,320); // goes to second object
+        drive(0.5,340); // goes to second object
         distcode(1,2);
 
         if(location != 1 && location != 2){

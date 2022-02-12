@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -12,8 +13,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
-@Autonomous(name = "BlueSpinALl")
-public class BlueSpinAll extends LinearOpMode {
+@Autonomous(name = "RedWarehouseSideAll")
+@Disabled
+public class RedWarehouseSideAll extends LinearOpMode {
     //FreightBot motors
     DcMotorEx BL, FL, FR, BR, arm, duc;
     Servo HSL;
@@ -73,14 +75,11 @@ public class BlueSpinAll extends LinearOpMode {
         //we need the robot to get the distance sensor to the 27 inch mark, the 35, and  44 1/2
         //distance sensor is 8 1/2 inches from the back (basically 8 1/2 inch head start)
 
-        drive(-0.5, -180);
 
-        waitseconds(5,1);
+        omniturn(500,false,1);
 
 
-        omniturn(1900,true,1);
-
-        waitseconds(0.5,0);
+        distcode(1,2);
 
         drive(-0.5, -400);
 
