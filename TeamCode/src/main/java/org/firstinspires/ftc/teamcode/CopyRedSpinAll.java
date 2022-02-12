@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -13,9 +12,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
-@Autonomous(name = "RedWarehouseSideAll")
-
-public class RedWarehouseSideAll extends LinearOpMode {
+@Autonomous(name = "CopyRedSpinAll")
+public class CopyRedSpinAll extends LinearOpMode {
     //FreightBot motors
     DcMotorEx BL, FL, FR, BR, arm, duc;
     Servo HSL;
@@ -68,32 +66,46 @@ public class RedWarehouseSideAll extends LinearOpMode {
 
         waitForStart();
 
+        HSL.setPosition(0);
+        HSR.setPosition(1);
         waitseconds(1,0);
 
         //we need the robot to get the distance sensor to the 27 inch mark, the 35, and  44 1/2
         //distance sensor is 8 1/2 inches from the back (basically 8 1/2 inch head start)
 
+        omniturn(300,false,1);
 
-        omniturn(900,false,1);
+        waitseconds(0.5,0);
+
+        drive(-0.5, -250);
 
 
-        distcode(1,2); //checks for second object
+        waitseconds(5,-1);
 
-        drive(-0.5, -340);//goes to third object
+        omniturn(600,false,1);
+        waitseconds(0.5,0);
 
-        distcode(1,3);
 
-        if(location != 2 && location != 3){
-            location = 1;
+        drive(-0.5, -250);
+
+
+        omniturn(1450,false,1);
+
+        waitseconds(0.5,0);
+
+        drive(-0.25, -400);//straightens on wall
+
+        drive(0.5,740); // goes to first object
+        distcode(1,1);
+
+        drive(0.5,340); // goes to second object
+        distcode(1,2);
+
+        if(location != 1 && location != 2){
+            location = 3;
             duc.setPower(0);
         }
-
-        omniturn(200,true,1);
-        waitseconds(0.5, 0);
-        turn(-0.5,-690);
-
-        omniturn(200,false,1);
-
+        omniturn(300,true,1);
 
         waitseconds(0.5,0);
 
@@ -132,7 +144,7 @@ public class RedWarehouseSideAll extends LinearOpMode {
 
         waitseconds(0.5,0);
 
-        omniturn(600,false,1);
+        omniturn(600,true,1);
 
 
 
@@ -276,7 +288,7 @@ public class RedWarehouseSideAll extends LinearOpMode {
 
 
 // you can use this as a regular DistanceSensor.
-        DistanceSensor sensorRange = hardwareMap.get(DistanceSensor.class, "dist2");//dist 2 is on the right if viewed from the servo side
+        DistanceSensor sensorRange = hardwareMap.get(DistanceSensor.class, "dist");
 
         // you can also cast this to a Rev2mDistanceSensor if you want to use added
         // methods associated with the Rev2mDistanceSensor class.
