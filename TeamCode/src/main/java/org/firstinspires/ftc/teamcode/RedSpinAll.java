@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
-@Autonomous(name = "RedSpinALl")
+@Autonomous(name = "RedSpinAll")
 public class RedSpinAll extends LinearOpMode {
     //FreightBot motors
     DcMotorEx BL, FL, FR, BR, arm, duc;
@@ -73,16 +73,21 @@ public class RedSpinAll extends LinearOpMode {
         //we need the robot to get the distance sensor to the 27 inch mark, the 35, and  44 1/2
         //distance sensor is 8 1/2 inches from the back (basically 8 1/2 inch head start)
 
-        drive(-0.5, -180);
-
-        waitseconds(5,1);
-
-
-        omniturn(1900,true,1);
+        omniturn(100,false,1);
 
         waitseconds(0.5,0);
 
-        drive(-0.5, -200);
+        drive(-0.5, -180);
+
+
+        waitseconds(5,-1);
+
+
+        omniturn(2000,false,1);
+
+        waitseconds(0.5,0);
+
+        drive(-0.5, -400);
 
         drive(0.5,740); // goes to first object
         distcode(1,1);
@@ -94,7 +99,7 @@ public class RedSpinAll extends LinearOpMode {
             location = 3;
             duc.setPower(0);
         }
-        omniturn(300,false,1);
+        omniturn(300,true,1);
 
         waitseconds(0.5,0);
 
@@ -126,14 +131,14 @@ public class RedSpinAll extends LinearOpMode {
         waitseconds(0.5,0);
         armpdown(-1,-100);//armdown only works for lowering the arm
 
-        drive(-0.5,-1500);
+        drive(-0.5,-1000);
 
 
         waitseconds(0.5,0);
 
         waitseconds(0.5,0);
 
-        omniturn(600,false,1);
+        omniturn(600,true,1);
 
 
 
@@ -277,7 +282,7 @@ public class RedSpinAll extends LinearOpMode {
 
 
 // you can use this as a regular DistanceSensor.
-        DistanceSensor sensorRange = hardwareMap.get(DistanceSensor.class, "dist2");
+        DistanceSensor sensorRange = hardwareMap.get(DistanceSensor.class, "dist");
 
         // you can also cast this to a Rev2mDistanceSensor if you want to use added
         // methods associated with the Rev2mDistanceSensor class.
@@ -452,6 +457,8 @@ public class RedSpinAll extends LinearOpMode {
 
             if (duck == 1) {
                 duc.setPower(0.5);
+            }else if (duck == -1){
+                duc.setPower(-0.5);
             }
             else if (duck == 0){
                 duc.setPower(0);

@@ -103,11 +103,11 @@ public class BlueSpinAll extends LinearOpMode {
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         if (location == 1){
-            armpos(0.5,900);//pos 1
+            armpos(0.5,4100);//pos 1
         }else if (location == 2){
             armpos(0.5,2600);// pos 2   doesn't work for going down right now
         }else if(location == 3){
-            armpos(0.5,4100);// pos 3
+            armpos(0.5,900);// pos 3
         }
 
         if(location == 1){
@@ -126,7 +126,7 @@ public class BlueSpinAll extends LinearOpMode {
         waitseconds(0.5,0);
         armpdown(-1,-100);//armdown only works for lowering the arm
 
-        drive(-0.5,-1500);
+        drive(-0.5,-1000);
 
 
         waitseconds(0.5,0);
@@ -277,7 +277,7 @@ public class BlueSpinAll extends LinearOpMode {
 
 
 // you can use this as a regular DistanceSensor.
-        DistanceSensor sensorRange = hardwareMap.get(DistanceSensor.class, "dist2");
+        DistanceSensor sensorRange = hardwareMap.get(DistanceSensor.class, "dist2");//dist 2 is on the right if viewed from the servo side
 
         // you can also cast this to a Rev2mDistanceSensor if you want to use added
         // methods associated with the Rev2mDistanceSensor class.
@@ -452,6 +452,8 @@ public class BlueSpinAll extends LinearOpMode {
 
             if (duck == 1) {
                 duc.setPower(0.5);
+            }else if (duck == -1){
+                duc.setPower(-0.5);
             }
             else if (duck == 0){
                 duc.setPower(0);
